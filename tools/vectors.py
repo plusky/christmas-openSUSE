@@ -530,10 +530,11 @@ def normalise(colour, palette):
     import colorsys
     r, g, b = (c / 255 for c in colour)
     h, light, s = colorsys.rgb_to_hls(r, g, b)
+    chroma = max(r, g, b) - min(r, g, b)
     if 260 / 360 <= h <= 340 / 360 and s > 0.2:
         ph, _, ps = colorsys.rgb_to_hls(*(c / 255 for c in rgb(palette["plum_icon"])))
         h, s = ph, min(s, ps)
-    elif light > 0.93 and s < 0.6:
+    elif light > 0.93 and chroma < 0.05:
         return rgb(palette["cream"])
     night = rgb(palette["night"])
     while light < 1 and contrast(tuple(round(c * 255) for c in colorsys.hls_to_rgb(h, light, s)), night) < 1.5:
