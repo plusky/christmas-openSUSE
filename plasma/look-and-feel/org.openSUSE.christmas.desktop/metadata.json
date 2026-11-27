@@ -1,0 +1,22 @@
+{
+    "KPackageStructure": "Plasma/LookAndFeel",
+    "KPlugin": {
+        "Authors": [
+            {
+                "Email": "martin@pluskal.org",
+                "Name": "Martin Pluskal"
+            }
+        ],
+        "Category": "",
+        "Description": "Cosy autumn Christmas desktop for openSUSE",
+        "Id": "org.openSUSE.christmas.desktop",
+        "License": "GPL-2.0-or-later",
+        "Name": "openSUSE Christmas",
+        "Version": "2026.12.0",
+        "Website": "https://github.com/plusky/christmas-openSUSE"
+    },
+    "Keywords": "Desktop;Workspace;Appearance;Look and Feel;Christmas;Autumn;openSUSE;",
+    "X-KDE-ParentApp": "",
+    "X-Plasma-APIVersion": "2",
+    "X-Plasma-MainScript": "defaults"
+}
