@@ -1,0 +1,8 @@
+[General]
+showlogo=hidden
+showClock=true
+type=image
+color=@sddm_fallback@
+fontSize=10
+background=@THEMEDIR@/background.jpg
+needsFullUserModel=false

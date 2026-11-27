@@ -1,0 +1,8 @@
+[Desktop Entry]
+Type=X-GNOME-Metatheme
+Name=openSUSE Christmas
+Comment=An autumn Christmas night for GTK 3, GNOME Shell, xfwm4 and Xfce notifications
+
+[X-GNOME-Metatheme]
+GtkTheme=openSUSE-christmas
+IconTheme=openSUSE-christmas-adwaita

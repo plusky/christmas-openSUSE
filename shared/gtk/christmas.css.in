@@ -1,0 +1,125 @@
+/* SPDX-FileCopyrightText: 2026 Martin Pluskal <martin@pluskal.org>
+ * SPDX-License-Identifier: LGPL-2.1-only
+ *
+ * openSUSE Christmas: appended to adw-gtk3-dark's gtk.css by
+ * tools/targets/gtk.py. adw-gtk3's widget rules use these named colours, and a
+ * later @define-color wins, so this recolours the whole theme. The palette
+ * tokens are filled in from art/palette.toml.
+ */
+
+/* Accent: ember behind white text, pumpkin as text on the night background */
+@define-color accent_bg_color @ember@;
+@define-color accent_fg_color @white@;
+@define-color accent_color @pumpkin@;
+
+@define-color window_bg_color @night@;
+@define-color window_fg_color @cream@;
+@define-color view_bg_color @view@;
+@define-color view_fg_color @cream@;
+@define-color headerbar_bg_color @header@;
+@define-color headerbar_fg_color @cream@;
+@define-color headerbar_backdrop_color @night@;
+@define-color sidebar_bg_color @header@;
+@define-color sidebar_fg_color @cream@;
+@define-color sidebar_backdrop_color @view_alt@;
+@define-color card_fg_color @cream@;
+@define-color dialog_bg_color @button@;
+@define-color dialog_fg_color @cream@;
+@define-color popover_bg_color @button@;
+@define-color popover_fg_color @cream@;
+@define-color thumbnail_bg_color @button@;
+@define-color thumbnail_fg_color @cream@;
+@define-color panel_bg_color @complementary@;
+@define-color panel_fg_color @cream@;
+
+/* Status colours as text, and behind white (dark on warning) text */
+@define-color success_color @olive@;
+@define-color warning_color @candle@;
+@define-color error_color @cranberry@;
+@define-color destructive_color @cranberry@;
+@define-color success_bg_color @moss@;
+@define-color warning_bg_color @candle@;
+@define-color error_bg_color @cranberry_dark@;
+@define-color destructive_bg_color @cranberry_dark@;
+@define-color success_fg_color @white@;
+@define-color warning_fg_color @night@;
+@define-color error_fg_color @white@;
+@define-color destructive_fg_color @white@;
+
+/* adw-gtk3 draws error and warning labels and entries in the background
+   colours; on the night background they need the text colours */
+label.error,
+entry.error,
+spinbutton.error,
+headerbar entry.error,
+.titlebar entry.error {
+  color: @error_color;
+  border-color: @error_color;
+}
+
+entry.warning,
+headerbar entry.warning,
+.titlebar entry.warning {
+  color: @warning_color;
+  border-color: @warning_color;
+}
+
+/* On/off states and levels in pumpkin: 3:1 against their troughs, where
+   ember is not. Focus rings are solid pumpkin too (tools/targets/gtk.py). */
+switch:checked,
+progressbar progress,
+scale highlight {
+  background-color: @accent_color;
+  border-color: @accent_color;
+}
+
+check:checked,
+radio:checked,
+check:indeterminate,
+radio:indeterminate {
+  background-image: image(@accent_color);
+  border-color: @accent_color;
+}
+
+check:not(:checked):not(:indeterminate),
+radio:not(:checked):not(:indeterminate) {
+  border-color: alpha(currentColor, 0.4);
+}
+
+/* Selected rows: solid ember behind white text, as in Plasma */
+row:selected,
+treeview.view:selected,
+.view:selected,
+iconview:selected {
+  background-color: @accent_bg_color;
+  color: @accent_fg_color;
+}
+
+/* Links in apricot, visited links in plum, as in Plasma */
+button:link > label,
+button:link,
+*:link {
+  color: @apricot@;
+}
+
+button:visited > label,
+button:visited,
+*:link:visited {
+  color: @plum@;
+}
+
+/* Xfce panel (xfce4-panel 4.20): night with pumpkin highlights */
+.xfce4-panel.background {
+  background-color: @complementary@;
+  color: @cream@;
+}
+
+.xfce4-panel.background button:hover {
+  background-color: alpha(@pumpkin@, 0.22);
+}
+
+.xfce4-panel.background button:checked,
+.xfce4-panel.background button:active {
+  background-color: alpha(@pumpkin@, 0.38);
+  color: @white@;
+}

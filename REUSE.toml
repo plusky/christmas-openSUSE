@@ -1,0 +1,44 @@
+version = 1
+SPDX-PackageName = "christmas-openSUSE"
+SPDX-PackageSupplier = "Martin Pluskal <martin@pluskal.org>"
+SPDX-PackageDownloadLocation = "https://github.com/plusky/christmas-openSUSE"
+
+# Artwork: wallpapers, icons, characters, previews, screenshots and the
+# Firefox theme (CC BY-SA is also one of the licences addons.mozilla.org offers)
+[[annotations]]
+path = ["art/**", "shared/wallpapers/**", "shared/icons/**", "shared/firefox/**", "docs/screenshots/**"]
+SPDX-FileCopyrightText = "2026 Martin Pluskal <martin@pluskal.org>"
+SPDX-License-Identifier = "CC-BY-SA-4.0"
+
+# Icon masters contributed by hand (art/prompts/12-contributed-icons.md); after
+# the artwork above, so this one wins for these files
+[[annotations]]
+path = ["art/source/vectors/app-code.svg", "art/source/vectors/app-chat.svg"]
+SPDX-FileCopyrightText = "2026 Pablo Herranz Ramírez <pablo.herranz@suse.com>"
+SPDX-License-Identifier = "CC-BY-SA-4.0"
+
+# The Plasma style is built from Breeze (LGPL); its ornaments share that licence
+[[annotations]]
+path = "plasma/desktoptheme/**"
+SPDX-FileCopyrightText = "2026 Martin Pluskal <martin@pluskal.org>"
+SPDX-License-Identifier = "LGPL-2.0-or-later"
+
+# Look-and-feel package metadata and the Plymouth theme (from Plymouth's spinner)
+[[annotations]]
+path = ["plasma/look-and-feel/**/metadata.json", "plasma/look-and-feel/**/contents/defaults", "shared/plymouth/**"]
+SPDX-FileCopyrightText = "2026 Martin Pluskal <martin@pluskal.org>"
+SPDX-License-Identifier = "GPL-2.0-or-later"
+
+# Docs, small config files and the art notes (palette, prompts)
+[[annotations]]
+path = [
+    "README.md", "CHANGELOG.md", "CONTRIBUTING.md", "AGENTS.md",
+    "CODE_OF_CONDUCT.md", "SECURITY.md", "docs/*.md", ".github/**",
+    ".gitignore", ".gitattributes", "REUSE.toml", "_typos.toml", ".editorconfig-checker.json",
+    "tools/requirements.txt", "tools/requirements-dev.txt", "tools/upstream.toml", "tools/breeze-icons.txt", "plasma/sddm/**",
+    "plasma/plasmalogin/**",
+    "gnome/**", "xfce/**", "sway/**", "shared/firefox/defaults/**", "shared/gtk/README", "shared/gtk/index.theme",
+    "art/*.toml", "art/*.md", "art/prompts/**",
+]
+SPDX-FileCopyrightText = "2026 Martin Pluskal <martin@pluskal.org>"
+SPDX-License-Identifier = "CC0-1.0"

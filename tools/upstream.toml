@@ -1,0 +1,98 @@
+# Upstream files the build downloads, pinned by SHA-256.
+
+# The Breeze Plasma style files tools/plasma_style.py builds on, from
+# libplasma v6.8.0; bump the tag and hashes together.
+
+base = "https://invent.kde.org/plasma/libplasma/-/raw/v6.8.0/src/desktoptheme/breeze"
+
+[files]
+"dialogs/background.svg" = "0134781e8ac85d66ae2241fd7aafa193cb51a5c8afaf14faa12a2308be39d36b"
+"widgets/panel-background.svg" = "d3727dff45616c762ad38016ea11471c14a5a24cbe5696fc60e4060217167165"
+"widgets/tooltip.svg" = "bef0010cebc5552ab4c2abee37aa663c0b653f172925c5a6739f2c30363c9492"
+"translucent/dialogs/background.svg" = "bbd6c261491c96a3922cf1dde15bc7b4686fee9a7583031115af104cb12397b0"
+"translucent/widgets/panel-background.svg" = "aa9deb528aa24164dca3a410cc292a4ae8659aeba18e19053b2159d8c633b86d"
+"translucent/widgets/tooltip.svg" = "748b5d828c7df40769b7cf141e6fc2795d7a653c462ca833c43205c8ce19a19c"
+"opaque/dialogs/background.svg" = "86f6c5ca1185bccd86730b075ec17d7021d12b7d4342fba0ab5583b90aabd11e"
+"opaque/widgets/panel-background.svg" = "695d900d9a8ccab7c7e530bc19b0ea68f6b3d6c336fc4d54fe256ac0cb2ace43"
+"opaque/widgets/tooltip.svg" = "9fd69cb7e8319d4c23edbc3220b76c157e10d3c9fd53fffd09bb50074994a969"
+"solid/dialogs/background.svg" = "6dec6513ef75f7af1951ffa5a3c036d438e1b96dd779c990790cd56f86abaefa"
+"solid/widgets/panel-background.svg" = "4afc5322f22494450a36a00451c1f077b80f21f3d0b7bd13be313387a5d1a414"
+"solid/widgets/tooltip.svg" = "e221404656676c6bf9cea3e569235463de28644e645f770a06f5b34a0d63c15e"
+"widgets/clock.svg" = "f7e513e10b1101449e369cd43b6113285f2399fed924bed1aa32cb6b10156639"
+
+# KDE's JSON schema for KPlugin metadata (metadata.json), from
+# sysadmin/ci-utilities; tools/check.py validates against it.
+[kpluginmetadata]
+url = "https://invent.kde.org/sysadmin/ci-utilities/-/raw/68adf5e6e8c83db9327f7b1d2980e67fc12d548c/resources/jsonschemas/kpluginmetadata.schema.json"
+sha256 = "3c89da0d5f743c6c76529b6b672de4857feb91856fc72f142e3008b69926c437"
+
+# Release archives the GNOME and Xfce editions build on: adw-gtk3 (LGPL-2.1-only),
+# recoloured into the GTK 3 theme by tools/targets/gtk.py, and xfwm4 (GPL-2.0+),
+# whose default window-manager theme tools/targets/xfce.py recolours.
+[archives.adw-gtk3]
+url = "https://github.com/lassekongo83/adw-gtk3/releases/download/v6.5/adw-gtk3v6.5.tar.xz"
+sha256 = "a81780fadfc432be0fc3d89c4ebb41aa28e4f032d42c36f9789c57dd10cfa41c"
+
+[archives.xfwm4]
+url = "https://archive.xfce.org/src/xfce/xfwm4/4.20/xfwm4-4.20.0.tar.bz2"
+sha256 = "a58b63e49397aa0d8d1dcf0636be93c8bb5926779aef5165e0852890190dcf06"
+
+# Plymouth's password-dialog images, from its spinner theme (GPL-2.0-or-later),
+# copied into the boot splash by tools/targets/plymouth.py so it doesn't depend
+# on the spinner theme being installed. keymap-render.png is left out: it has
+# to match the installed Plymouth, and without it no layout name is shown.
+[plymouth]
+base = "https://gitlab.freedesktop.org/plymouth/plymouth/-/raw/26.134.222/themes/spinner"
+
+[plymouth.files]
+"bullet.png" = "f577b79cbe0a6576b285db18f127e07b9bb1e99f248acfecc38723c6cfad3035"
+"capslock.png" = "5e4877145fce9be41148542e36a49eca238452ee73723604af809a0527153c11"
+"entry.png" = "8325ccd1676dd318498d739a20af2f234ce35690cb89796af39afaeba179bc62"
+"keyboard.png" = "cf6674ab2f7fa5bc401dddd14f8818c4ceb86cdb5ba3ae5553e8878a5320aa0f"
+"lock.png" = "4854942e80051cec8cf6265ce011cad210954a8ee08609fce31dd59f973c7d9c"
+
+# Upstream source that comments and checks follow without downloading it: what
+# they say GTK or GNOME Settings does was read here, at these tags.
+[references]
+# check.py gtk_fast_symbolic(): what GTK's own one-colour icon parser accepts
+gtk-symbolic-parser = "https://gitlab.gnome.org/GNOME/gtk/-/blob/4.22.5/gtk/gdktextureutils.c"
+# vectors.py symbolic_files(): at an exact size, a Fixed directory wins over a
+# Scalable one (compare_dir_size_matches)
+gtk-icon-lookup = "https://gitlab.gnome.org/GNOME/gtk/-/blob/4.22.5/gtk/gtkicontheme.c"
+# vectors.py GNOME_SETTINGS: the icons of GNOME Settings' sidebar and pages
+gnome-settings-panels = "https://gitlab.gnome.org/GNOME/gnome-control-center/-/tree/50.4/panels"
+# targets/firefox.py and check.py check_firefox(): Firefox installs a theme it
+# finds in its own folders disabled (loadManifestFromWebManifest), and enables
+# the theme a default value of extensions.activeThemeID names when it starts a
+# new profile (DistributionCustomizer._checkCustomizationComplete)
+firefox-themes-start-disabled = "https://github.com/mozilla-firefox/firefox/blob/FIREFOX_158_0_RELEASE/toolkit/mozapps/extensions/internal/XPIInstall.sys.mjs"
+firefox-new-profile-theme = "https://github.com/mozilla-firefox/firefox/blob/FIREFOX_158_0_RELEASE/browser/components/distribution.sys.mjs"
+# targets/plasmalogin.py and check.py check_plasmalogin(): the greeter has no
+# themes (its QML is built in) and reads its wallpaper from
+# [Greeter][Wallpaper][<plugin>], from /etc/plasmalogin.conf.d, then
+# /usr/lib/plasmalogin/defaults.conf and plasmalogin.conf.d, then
+# /etc/plasmalogin.conf (settings/plasmaloginsettings.cpp); System Settings
+# saves to /etc/plasmalogin.conf and copies the file of a file:// Image
+# (kcm/kcm.cpp); its login form is Breeze's, over the wallpaper WallpaperFader
+# blurs
+plasma-login-manager = "https://invent.kde.org/plasma/plasma-login-manager/-/tree/v6.8.1/src/frontend"
+# targets/plasma.py and check.py check_look_and_feel(): a global theme without
+# contents/colors names its colour scheme, which Plasma looks up with the first
+# letter capitalised (KLookAndFeelManager::colorSchemeFile), so it never finds
+# openSUSEChristmas.colors; with contents/colors, Plasma applies that file
+plasma-global-theme-colours = "https://invent.kde.org/plasma/plasma-workspace/-/blob/v6.8.1/libklookandfeel/klookandfeelmanager.cpp"
+# Of the config files KConfig reads, a later one wins (KConfigPrivate::parseConfigFiles)
+kconfig-sources = "https://invent.kde.org/frameworks/kconfig/-/blob/v6.30.0/src/core/kconfig.cpp"
+# The image wallpaper takes a path or a URL in Image, and crops to fill by default
+plasma-image-wallpaper = "https://invent.kde.org/plasma/plasma-workspace/-/blob/v6.8.1/wallpapers/image/plugin/utils/mediaproxy.cpp"
+# openSUSE gives Plasma Login Manager's greeter user its global theme
+# (org.openSUSE.desktop) in /etc/xdg/kdeglobals, a file of plasma6-branding-openSUSE
+opensuse-kdeglobals = "https://github.com/openSUSE/plasma-openSUSE/blob/9c664b7d3e53a76147c5c74072f5ed446dfae42a/config-files/etc/xdg/kdeglobals"
+# check.py check_licence_texts(): rpmlint reports a file that names a GNU
+# licence next to one of the FSF's former postal addresses
+# (incorrect-fsf-address, which says to take a new copy from the FSF)
+rpmlint-fsf-address = "https://github.com/rpm-software-management/rpmlint/blob/2.10.0/rpmlint/checks/FilesCheck.py"
+# LICENSES/GPL-2.0-or-later.txt, LGPL-2.0-or-later.txt and LGPL-2.1-only.txt
+# are the FSF's gpl-2.0.txt, lgpl-2.0.txt and lgpl-2.1.txt from here, as of
+# 2026-10-28, which give its web address; SPDX's copies still give 51 Franklin Street
+fsf-licence-texts = "https://www.gnu.org/licenses/old-licenses/"
