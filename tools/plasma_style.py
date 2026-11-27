@@ -7,10 +7,10 @@ Breeze's frame SVGs take their colours from the colour scheme, so with the
 openSUSE Christmas scheme most of the autumn look comes for free. The style
 ships no `colors` file of its own, like Breeze, so a high-contrast or other
 scheme the user picks still applies to the panel and popups. This script:
-  - adds a leaf sprig `overlay` to popups (dialogs/background); the panel
+  - adds a fir-sprig `overlay` to popups (dialogs/background); the panel
     keeps Breeze's plain frame, which takes the style's colours,
   - tints the tooltip shadow ember so tooltips glow warmly,
-  - swaps the analog clock face for a carved pumpkin with dark hands.
+  - swaps the analog clock face for a star clock face with dark hands.
 It does this for all four Breeze variants (plain, translucent, opaque, solid)
 so Plasma never falls back to an unthemed Breeze frame.
 """
@@ -118,7 +118,7 @@ def set_class(svg, element_id, new_class):
     return out
 
 
-def pumpkin_clock(svg, palette):
+def star_clock(svg, palette):
     svg = svg.replace('id="ClockFace"', 'id="ClockFaceBreeze"', 1)
     svg = set_class(svg, "HourHand", "ColorScheme-Background")
     svg = set_class(svg, "MinuteHand", "ColorScheme-Background")
@@ -142,7 +142,7 @@ def build(out, palette):
         name, color, factor = TOOLTIP_SHADOW
         path = variant + name
         write(out / path, tint_shadow(upstream(path), palette[color], factor))
-    write(out / "widgets/clock.svg", pumpkin_clock(upstream("widgets/clock.svg"), palette))
+    write(out / "widgets/clock.svg", star_clock(upstream("widgets/clock.svg"), palette))
     return out
 
 

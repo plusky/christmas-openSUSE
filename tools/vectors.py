@@ -41,7 +41,7 @@ FOLDER_EMBLEMS = {
     "folder-games": "glyph-gamepad",
     "folder-network": "glyph-web",
     "folder-remote": "glyph-web",
-    "folder-image-people": "glyph-ghosts",
+    "folder-image-people": "glyph-people",
     "folder-favorites": "glyph-bookmark",
 }
 LAUNCHERS = ("start-here-kde-plasma", "start-here-kde", "start-here")
@@ -154,7 +154,7 @@ DEVICES = {
 }
 
 # Settings dialogs (Xfce's, and the same KCMs and panels elsewhere): the
-# glyph carved into the pumpkin master, large enough to tell apart at 16 px
+# glyph carved into the bauble master, large enough to tell apart at 16 px
 SETTINGS = {
     "glyph-brush": ("org.xfce.settings.appearance", "preferences-desktop-theme", "preferences-desktop-theme-global"),
     "emblem-stencil": ("preferences-desktop-plasma-theme", "org.xfce.PanelProfiles"),
@@ -180,12 +180,12 @@ SETTINGS = {
     "glyph-quill": ("org.xfce.settings.editor", "ca.desrt.dconf-editor", "preferences-desktop-font"),
     "glyph-crystal": ("org.xfce.about", "ktip"),
     "glyph-screensaver": ("org.xfce.ScreenSaver", "preferences-desktop-screensaver"),
-    "emblem-lantern": ("preferences-system-splash",),
+    "glyph-sparkle": ("preferences-system-splash",),
     "glyph-logout": ("lightdm-gtk-greeter-settings", "preferences-system-login"),
     "glyph-web": ("preferences-system-network", "nm-connection-editor", "preferences-system-network-connection"),
     "glyph-lock": ("org.freedesktop.MalcontentControl", "preferences-desktop-user-password"),
     "glyph-shield": ("preferences-security",),
-    "glyph-ghosts": ("mugshot", "preferences-desktop-user", "system-users", "preferences-system-users"),
+    "glyph-people": ("mugshot", "preferences-desktop-user", "system-users", "preferences-system-users"),
     "glyph-apps": ("preferences-desktop-icons",),
     "glyph-palette": ("preferences-desktop-color", "preferences-desktop-display-color"),
     "glyph-cursor": ("preferences-desktop-cursors",),
@@ -198,7 +198,7 @@ SETTINGS = {
     "glyph-gamepad": ("preferences-desktop-gaming",),
     "emblem-note": ("preferences-desktop-multimedia",),
 }
-SETTINGS_EMBLEM_SIZE = 0.68   # glyph size relative to the pumpkin's body
+SETTINGS_EMBLEM_SIZE = 0.68   # glyph size relative to the bauble's body
 SETTINGS_EMBLEM_SIZE_SMALL = 0.95   # at 16 and 22 px
 
 # File types: the page master with an emblem -> the MIME type icon names.
@@ -258,7 +258,7 @@ SYMBOLIC = {
     "glyph-power": ("actions", ("system-shutdown", "system-shutdown-symbolic")),
     "glyph-lock": ("actions", ("system-lock-screen", "system-lock-screen-symbolic")),
     "glyph-logout": ("actions", ("system-log-out", "system-log-out-symbolic", "xfsm-logout")),
-    "glyph-ghosts": ("actions", ("system-switch-user", "system-switch-user-symbolic")),
+    "glyph-people": ("actions", ("system-switch-user", "system-switch-user-symbolic")),
     # Not notifications-disabled: do not disturb needs the crossed bell (Plasma's tray, GNOME)
     "glyph-bell": ("actions", ("notification-symbolic", "notification", "bell-symbolic", "bell")),
 }
@@ -281,7 +281,7 @@ GNOME_SETTINGS = {
     "glyph-battery": ("power",), "glyph-printer": ("printers",), "glyph-shield": ("privacy",),
     "glyph-globe": ("region",), "glyph-magnifier": ("search",), "emblem-note": ("sound",), "glyph-gear": ("system",),
     "glyph-hourglass": ("time", "screen-time"), "glyph-stylus": ("wacom",), "glyph-heart": ("wellbeing",),
-    "glyph-ghosts": ("users",), "glyph-lock": ("screen-lock",), "glyph-signpost": ("location-access", "network-proxy"),
+    "glyph-people": ("users",), "glyph-lock": ("screen-lock",), "glyph-signpost": ("location-access", "network-proxy"),
     "glyph-broom": ("trash-file-history",), "glyph-speech": ("device-diagnostics",),
     "glyph-cursor": ("accessibility-pointing",),
 }
@@ -800,31 +800,26 @@ def mime_icons(palette):
 
 
 def settings_icons(palette):
-    """Settings dialogs: the glyph carved into the pumpkin master, dark like an
-    unlit jack-o'-lantern. The pumpkin's body is flattened to two oranges so
+    """Settings dialogs: the glyph carved into the bauble master. The bauble's body is flattened to two warm golds so
     the glyph stays readable; at 16 and 22 px, where settings lists show them,
     the body fills the icon and the glyph nearly fills the body, so the
     entries of a list tell apart."""
-    pumpkin = load("settings-pumpkin")
-    if pumpkin is None:
+    bauble = load("settings-bauble")
+    if bauble is None:
         return {}
-    frame = union(s.bbox() for s in pumpkin)
-    top = frame[1] + (frame[3] - frame[1]) * 0.25          # below the stem
-    lower = [s for s in pumpkin if s.bbox()[1] >= top]
-    body = union(s.bbox() for s in lower)
+    frame = union(s.bbox() for s in bauble)
+    body = union(s.bbox() for s in bauble)
     cx, cy = (body[0] + body[2]) / 2, (body[1] + body[3]) / 2
     face = palette["pumpkin"]
 
     def flat(s):
-        if s not in lower:
-            return normalise(s.colour, palette)
         return rgb(palette["ember"] if luminance(s.colour) < 0.45 else face)
-    pumpkin_markup = "".join(s.markup(flat(s)) for s in pumpkin)
+    bauble_markup = "".join(s.markup(flat(s)) for s in bauble)
 
     def glyph_box(share):
         size = min(body[2] - body[0], body[3] - body[1]) * share / EMBLEM_SCALE
         return cx - size / 2, cy - size / 2, cx + size / 2, cy + size / 2
-    # small: a square around the body, so the stem only peeks in at the top
+    # small: a square around the body, so the cap only peeks in at the top
     side = max(body[2] - body[0], body[3] - body[1])
     small_frame = (cx - side / 2, cy - side / 2, cx + side / 2, cy + side / 2)
     # Where Breeze has a one-colour twin of a name (Plasma asks for those in
@@ -837,9 +832,9 @@ def settings_icons(palette):
         if not shapes:
             continue
         carved = emblem_markup(shapes, glyph_box(SETTINGS_EMBLEM_SIZE), palette["complementary"], face)
-        big = icon(pumpkin_markup + carved, frame, 0.06)
+        big = icon(bauble_markup + carved, frame, 0.06)
         carved = emblem_markup(shapes, glyph_box(SETTINGS_EMBLEM_SIZE_SMALL), palette["complementary"], face)
-        small = {px: icon(pumpkin_markup + carved, small_frame, 0.0, px) for px in (16, 22)}
+        small = {px: icon(bauble_markup + carved, small_frame, 0.0, px) for px in (16, 22)}
         for n in names:
             made[f"scalable/apps/{n}.svg"] = big
             made.update({f"{px}x{px}/apps/{n}.svg": text for px, text in small.items()})
@@ -870,17 +865,27 @@ def ornament(name, palette):
     if shapes is None:
         return None
     # Ornaments have no white of their own: any left is backdrop trapped
-    # between shapes (between a twig and a leaf, say)
-    shapes = [s for s in shapes if luminance(s.colour) <= 0.97]
+    # between shapes (between fir needles, say) — except the clock face,
+    # whose dial is white on purpose. load() already dropped edge-touching
+    # backdrop whites, so any white reaching here is the dial: keep it cream.
+    if stem == "clock-face":
+        for s in shapes:
+            if luminance(s.colour) > 0.97:
+                s.colour = rgb(palette["cream"])
+    else:
+        shapes = [s for s in shapes if luminance(s.colour) <= 0.97]
     markup = "".join(s.markup() for s in shapes)
     x0, y0, x1, y1 = union(s.bbox() for s in shapes)
     if stem == "popup-sprig":
         pad = (x1 - x0) * 0.02
         w, h = x1 - x0 + 2 * pad, y1 - y0 + 2 * pad
         return tidy(svg(f'<g transform="translate({pad - x0:g} {pad - y0:g})">{markup}</g>', (0, 0, w, h)))
-    # clock-face: the pumpkin body centred on (100, 100), which the hands turn
+    # clock-face: the clock body centred on (100, 100), which the hands turn
     # around; the invisible rect keeps the element exactly 200x200.
     body = [s for s in shapes if s.colour[0] > 150 and s.colour[0] > s.colour[2] + 60]
+    if not body:
+        # A dark clock (light face): fall back to the largest shape.
+        body = [max(shapes, key=lambda s: area(s.bbox()))]
     bx0, by0, bx1, by1 = union(s.bbox() for s in body)
     cx, cy = (bx0 + bx1) / 2, (by0 + by1) / 2
     reach = max(cx - x0, x1 - cx, cy - y0, y1 - cy)

@@ -38,10 +38,10 @@ the first gallery.)
 | Piece | ID | Works with |
 |---|---|---|
 | Wallpaper: dusk by day, moonlit by night | `openSUSEchristmas` | Plasma, GNOME (light and dark), Xfce |
-| Plasma style: autumn colours, leaf sprig on popups, ember tooltip glow, pumpkin clock | `openSUSE-christmas` | Plasma |
+| Plasma style: winter colours, fir sprig on popups, ember tooltip glow, star clock | `openSUSE-christmas` | Plasma |
 | Colour scheme | `openSUSEChristmas` | Plasma and KDE apps |
-| Global theme with a pumpkin splash screen | `org.openSUSE.christmas.desktop` | Plasma |
-| Icon theme over Breeze Dark: folders, file types, drives and devices, trash, the apps KDE, GNOME and Xfce ship by default (files, terminal, settings, editor, calculator, clocks, mail (also Thunderbird), maps, music (also Spotify), videos and more) and YaST, System Settings' and Xfce's settings as glyphs carved into pumpkins and GNOME Settings' panels as one-colour glyphs, a web-browser icon (also for Firefox), code-editor and chat icons (VSCodium, Slack, Polari, NeoChat), app-menu and power icons | `openSUSE-christmas` | Plasma |
+| Global theme with a star splash screen | `org.openSUSE.christmas.desktop` | Plasma |
+| Icon theme over Breeze Dark: folders, file types, drives and devices, trash, the apps KDE, GNOME and Xfce ship by default (files, terminal, settings, editor, calculator, clocks, mail (also Thunderbird), maps, music (also Spotify), videos and more) and YaST, System Settings' and Xfce's settings as glyphs carved into baubles and GNOME Settings' panels as one-colour glyphs, a web-browser icon (also for Firefox), code-editor and chat icons (VSCodium, Slack, Polari, NeoChat), app-menu and power icons | `openSUSE-christmas` | Plasma |
 | The same icons over Adwaita | `openSUSE-christmas-adwaita` | GNOME, Xfce, Sway |
 | GTK 3 theme: night colours with ember and pumpkin accents, built on [adw-gtk3](https://github.com/lassekongo83/adw-gtk3) | `openSUSE-christmas` | GNOME, Xfce, GTK 3 apps |
 | GNOME Shell theme: top bar, menus, quick settings, calendar | `openSUSE-christmas` | GNOME with the User Themes extension |
