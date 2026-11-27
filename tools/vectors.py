@@ -4,8 +4,9 @@
 
 Recraft SVGs are a flat list of <path d fill="rgb()" transform="translate()">
 on a 2048x2048 canvas, with a full-canvas white backdrop path first and C2PA
-content credentials in <metadata>. This module reads them as (d, colour)
-shapes, drops the backdrop, and recomposes them:
+content credentials in <metadata>; a few fills may reference linear gradients,
+which load() flattens to their mean stop colour. This module reads them as
+(d, colour) shapes, drops the backdrop, and recomposes them:
 
   - every folder icon is the master folder's body plus one emblem, so all
     folders share exactly the same shape; emblems are one-colour glyphs
@@ -310,6 +311,23 @@ def luminance(c):
     return (0.299 * r + 0.587 * g + 0.114 * b) / 255
 
 
+def gradient_means(text):
+    """Mean stop colour of each gradient, by id: Recraft sometimes fills
+    shapes with a gradient despite the prompt asking for flat shapes. The
+    build flattens those to their unweighted mean stop colour (offsets and
+    opacity ignored; #hex stops and href-only gradients are not resolved):
+    a near-solid shading survives this at icon sizes; a real blend would need
+    a re-render."""
+    means = {}
+    for m in re.finditer(r'<(?:linear|radial)Gradient[^>]*\bid="([^"]+)"[^>]*>(.*?)</(?:linear|radial)Gradient>',
+                         text, re.S):
+        stops = re.findall(r'stop-color="rgb\((\d+),(\d+),(\d+)\)"', m.group(2))
+        if stops:
+            n = len(stops)
+            means[m.group(1)] = tuple(round(sum(int(s[i]) for s in stops) / n) for i in range(3))
+    return means
+
+
 def load(name):
     """Shapes of art/source/vectors/<name>.svg, without the backdrop; None if missing."""
     f = MASTERS / f"{name}.svg"
@@ -319,11 +337,30 @@ def load(name):
     if text.startswith("version https://git-lfs"):
         raise SystemExit(f"{f} is a Git LFS pointer: run `git lfs pull` first")
     text = re.sub(r"<metadata>.*?</metadata>", "", text, flags=re.S)
-    w, h = (float(v) for v in re.search(r'viewBox="0 0 ([\d.]+) ([\d.]+)"', text).groups())
+    viewbox = re.search(r'viewBox="0 0 ([\d.]+) ([\d.]+)"', text)
+    if not viewbox:
+        raise SystemExit(f"{f}: no 0 0 W H viewBox")
+    w, h = (float(v) for v in viewbox.groups())
     shapes = []
+    fills = gradient_means(text)
     for attrs in re.findall(r"<path\b([^>]*?)/?>", text):
-        d = re.search(r'\bd="([^"]+)"', attrs).group(1)
-        r, g, b = (int(v) for v in re.search(r'fill="rgb\((\d+),(\d+),(\d+)\)"', attrs).groups())
+        d = re.search(r'\bd="([^"]+)"', attrs)
+        if not d:
+            raise SystemExit(f"{f}: a path has no d")
+        d = d.group(1)
+        fill = re.search(r'fill="([^"]+)"', attrs)
+        if not fill:
+            raise SystemExit(f"{f}: a path has no fill")
+        fstr = fill.group(1)
+        if fstr.startswith("url(#"):
+            gid = fstr[5:-1]
+            if gid not in fills:
+                raise SystemExit(f"{f}: fills reference an unknown gradient #{gid}")
+            fstr = "rgb({},{},{})".format(*fills[gid])
+        rgbm = re.search(r'rgb\((\d+),(\d+),(\d+)\)', fstr)
+        if not rgbm:
+            raise SystemExit(f"{f}: cannot parse fill {fstr!r} (only rgb() and url(#gradient) fills)")
+        r, g, b = (int(v) for v in rgbm.groups())
         move = re.search(r'translate\(([-\d.]+)[ ,]+([-\d.]+)\)', attrs)
         dx, dy = (float(move.group(1)), float(move.group(2))) if move else (0.0, 0.0)
         shapes.append(Shape(d, (r, g, b), dx, dy))
@@ -479,7 +516,7 @@ def to_chameleon_green(colour, chameleon):
     """Move greens and teals to the chameleon's hue, keeping lightness and saturation."""
     import colorsys
     h, light, s = colorsys.rgb_to_hls(*(c / 255 for c in colour))
-    if 70 / 360 <= h <= 185 / 360 and s > 0.2:
+    if 60 / 360 <= h <= 190 / 360 and s > 0.2:
         h = colorsys.rgb_to_hls(*(c / 255 for c in rgb(chameleon)))[0]
         return tuple(round(c * 255) for c in colorsys.hls_to_rgb(h, light, s))
     return colour
@@ -513,31 +550,33 @@ def area(box):
     return (box[2] - box[0]) * (box[3] - box[1])
 
 
-def potion_markup(trash, potion):
-    """The glowing potion and bubbles of `potion`, sized and placed on `trash`'s rim.
+def snow_markup(trash, snow):
+    """The snow heap with its star, sized and placed on `trash`'s rim.
 
-    The potion goes first, so the cauldron's rim hides its lower half."""
+    The snow goes first, so the bucket's rim hides its lower half. Every
+    non-backdrop shape of the snow master is contents (the backdrop is
+    already dropped by load()): snow, star and the mound's outline."""
     rim = min(trash, key=lambda s: s.bbox()[1])
     rx0, ry0, rx1, _ = rim.bbox()
-    warm = [s for s in potion if s.colour[0] > 200 and s.colour[1] > 80 and s.colour[2] < 120]
-    surface = max(warm, key=lambda s: area(s.bbox()))
+    contents = [s for s in snow]
+    surface = max(contents, key=lambda s: area(s.bbox()))
     sx0, sy0, sx1, sy1 = surface.bbox()
     k = 0.9 * (rx1 - rx0) / (sx1 - sx0)
     tx = (rx0 + rx1) / 2 - (sx0 + sx1) / 2 * k
-    ty = ry0 - (sy0 + 0.6 * (sy1 - sy0)) * k       # the potion bubbles up over the rim
-    top = ty + min(s.bbox()[1] for s in warm) * k
+    ty = ry0 - (sy0 + 0.6 * (sy1 - sy0)) * k       # the snow heaps up over the rim
+    top = ty + min(s.bbox()[1] for s in contents) * k
     return (f'<g transform="translate({tx:.3f} {ty:.3f}) scale({k:.6f})">'
-            + "".join(s.markup() for s in warm) + "</g>"), top
+            + "".join(s.markup() for s in contents) + "</g>"), top
 
 
 def other_icons(palette):
     icons = {}
-    trash, potion = load("trash"), load("potion")
+    trash, snow = load("trash"), load("snow")
     if trash:
         pot = paint(trash, palette)
         box = union(s.bbox() for s in trash)
-        if potion:
-            full, top = potion_markup(trash, potion)
+        if snow:
+            full, top = snow_markup(trash, snow)
             box = (box[0], min(box[1], top), box[2], box[3])   # same frame for both
             icons["scalable/places/user-trash-full.svg"] = icon(full + pot, box, 0.06)
         icons["scalable/places/user-trash.svg"] = icon(pot, box, 0.06)
