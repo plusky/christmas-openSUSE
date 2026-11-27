@@ -9,7 +9,8 @@ shapes, drops the backdrop, and recomposes them:
 
   - every folder icon is the master folder's body plus one emblem, so all
     folders share exactly the same shape; emblems are one-colour glyphs
-    recoloured cream, their white details recoloured to the folder front;
+    recoloured to the scheme's night navy, their white details recoloured to
+    the folder front;
   - other icons (trash, launcher) are cleaned and moved to a 64x64 viewBox;
   - ornaments for the Plasma style are cropped to their content.
 
@@ -25,12 +26,12 @@ ICON_SIZE = 64
 
 FOLDER_EMBLEMS = {
     "folder-documents": "emblem-scroll",
-    "folder-download": "emblem-acorn",
+    "folder-download": "emblem-bauble",
     "folder-music": "emblem-note",
     "folder-pictures": "emblem-picture",
     "folder-videos": "emblem-reel",
     "folder-templates": "emblem-stencil",
-    "folder-publicshare": "emblem-lantern",
+    "folder-publicshare": "emblem-share",
     "user-home": "emblem-cottage",
     "user-desktop": "emblem-monitor",
     "folder-development": "glyph-wand",
@@ -50,10 +51,10 @@ ALIASES = {
     "folder-downloads": "folder-download",
     "folder-video": "folder-videos",
     "folder-images": "folder-pictures",
+    "folder-image": "folder-pictures",
     "folder-picture": "folder-pictures",
     "folder-desktop": "user-desktop",
     "user-bookmarks": "folder-favorites",
-    "folder-drag-accept": "folder-open",
     "folder-visiting": "folder-open",
 }
 EMBLEM_SCALE = 1.12      # emblem size relative to the master's leaf
@@ -387,10 +388,21 @@ def icon(shapes_markup, box, margin=0.0, size=ICON_SIZE):
 # --- folders -------------------------------------------------------------------
 
 def split_folder(shapes):
-    """(body, leaf, front colour): the leaf is the near-white emblem and anything inside it."""
+    """(body, leaf, front colour): the leaf is the emblem and anything inside
+    it, near-white on a dark pocket, or the dark emblem on a light pocket."""
     leaf = [s for s in shapes if luminance(s.colour) > 0.93]
+    body = [s for s in shapes if s not in leaf]
+    front = max(body, key=lambda s: (s.bbox()[3] - s.bbox()[1]) * (s.bbox()[2] - s.bbox()[0])
+                if s.colour[0] > s.colour[2] else 0)
     if not leaf:
-        raise SystemExit("folder master: no light emblem found")
+        # A dark emblem on a light pocket: the small dark shapes sitting on it
+        # (light pocket detail like rims stays in the body: luminance-gated).
+        fb, fa = union([front.bbox()]), area(front.bbox())
+        leaf = [s for s in body if luminance(s.colour) < 0.5 and inside(s.bbox(), fb)
+                and area(s.bbox()) < 0.25 * fa]
+        if not leaf:
+            raise SystemExit("folder master: no emblem found")
+        body = [s for s in shapes if s not in leaf]
     leaf_box = union(s.bbox() for s in leaf)
     leaf += [s for s in shapes if s not in leaf and inside(s.bbox(), leaf_box)]
     body = [s for s in shapes if s not in leaf]
@@ -410,9 +422,11 @@ def emblem_markup(shapes, box, ink, paper):
     return fit(body, gbox, (cx - size / 2, cy - size / 2, size))
 
 
-def open_folder_markup(body, palette):
-    """The master folder opened: the front pocket tilts towards the viewer over
-    a sheet of paper. Made from the master's own shapes, so it matches."""
+def open_folder_markup(body, palette, paper=True):
+    """The master folder opened: the front pocket tilts towards the viewer,
+    over a sheet of paper when `paper` (a drag target); plain open otherwise
+    (Dolphin's open state for every folder, even empty ones). Made from the
+    master's own shapes, so it matches."""
     import math
     front = [s for s in body if s.colour[0] > s.colour[2] + 40]       # pocket and its top edge
     back = [s for s in body if s not in front]
@@ -420,12 +434,15 @@ def open_folder_markup(body, palette):
     bx0, by0, bx1, by1 = union(s.bbox() for s in back)
     pw, ph = (bx1 - bx0) * 0.78, (fy1 - by0) * 0.7
     px, py = bx0 + (bx1 - bx0) * 0.11, by0 + (fy0 - by0) * 0.6
-    paper = (f'<rect x="{px:.1f}" y="{py:.1f}" width="{pw:.1f}" height="{ph:.1f}" rx="{pw * 0.03:.1f}" '
-             f'fill="{palette["cream"]}" transform="rotate(-4 {px + pw / 2:.1f} {py + ph / 2:.1f})"/>')
+    paper_rect = ""
+    if paper:
+        paper_rect = (f'<rect x="{px:.1f}" y="{py:.1f}" width="{pw:.1f}" height="{ph:.1f}" '
+                      f'rx="{pw * 0.03:.1f}" fill="{palette["cream"]}" '
+                      f'transform="rotate(-4 {px + pw / 2:.1f} {py + ph / 2:.1f})"/>')
     k, lean = 0.82, math.tan(math.radians(14))     # squash towards the bottom edge, lean right
     e = lean * fy1 - lean * (fy1 - fy0) * k / 2
     tilt = f'<g transform="matrix(1 0 {-lean:.4f} {k} {e:.2f} {fy1 * (1 - k):.2f})">'
-    return "".join(s.markup() for s in back) + paper + tilt + "".join(s.markup() for s in front) + "</g>"
+    return "".join(s.markup() for s in back) + paper_rect + tilt + "".join(s.markup() for s in front) + "</g>"
 
 
 def folder_icons(palette):
@@ -443,14 +460,16 @@ def folder_icons(palette):
             icon(body_markup + "".join(s.markup(cream if luminance(s.colour) > 0.93 else None) for s in leaf),
                  canvas, 0.06),
         "16x16/places/folder.svg": icon(body_markup, canvas, 0.0, 16),
-        "scalable/places/folder-open.svg": icon(open_folder_markup(body, palette), canvas, 0.06),
+        "scalable/places/folder-open.svg": icon(open_folder_markup(body, palette, paper=False), canvas, 0.06),
+        "scalable/places/folder-drag-accept.svg":
+            icon(open_folder_markup(body, palette, paper=True), canvas, 0.06),
     }
     for name, emblem in FOLDER_EMBLEMS.items():
         shapes = load(emblem)
         if shapes is None:
             continue
         icons[f"scalable/places/{name}.svg"] = icon(
-            body_markup + emblem_markup(shapes, leaf_box, cream, front), canvas, 0.06)
+            body_markup + emblem_markup(shapes, leaf_box, palette["night"], front), canvas, 0.06)
     return icons
 
 
@@ -536,7 +555,7 @@ def other_icons(palette):
         grow = (box[2] - box[0]) * 0.25
         box = (box[0] - grow, box[1] - grow, box[2] + grow, box[3] + grow)
         icons["16x16/places/user-home.svg"] = icon(
-            "".join(s.markup() for s in body) + emblem_markup(cottage, box, palette["cream"], front),
+            "".join(s.markup() for s in body) + emblem_markup(cottage, box, palette["night"], front),
             union(s.bbox() for s in folder), 0.0, 16)
     return icons
 
@@ -552,7 +571,7 @@ def app_icons(palette):
     if folder and bat:
         body, leaf, front = split_folder(folder)
         text = icon("".join(s.markup() for s in body)
-                    + emblem_markup(bat, union(s.bbox() for s in leaf), palette["cream"], front),
+                    + emblem_markup(bat, union(s.bbox() for s in leaf), palette["night"], front),
                     union(s.bbox() for s in folder), 0.06)
         made.update({f"scalable/apps/{n}.svg": text for n in DOLPHIN})
     return made
