@@ -3,33 +3,33 @@
 # splash, SDDM and Plymouth from these values; nothing else hardcodes them.
 
 [colors]
-# Backgrounds: a warm, plum-tinted night
-night = "#1C1622"          # window
-view = "#141018"           # lists, text fields
-view_alt = "#1E1826"       # alternate rows
-header = "#231B2A"         # headers, title bars, tooltips
-button = "#2A2130"
-complementary = "#120E16"  # OSDs and other complementary areas
-raised = "#40334A"         # raised controls on menus: quick toggles, title bar button hover
-border = "#7A6E80"         # edges that must show at 3:1: text fields
-pumpkin_dark = "#6B3410"   # alternate background for accented areas
+# Backgrounds: a cold, blue-tinted winter night
+night = "#181C2E"          # window
+view = "#111420"           # lists, text fields
+view_alt = "#1D2233"       # alternate rows
+header = "#20263E"         # headers, title bars, tooltips
+button = "#272C4A"
+complementary = "#0E1120"  # OSDs and other complementary areas
+raised = "#3D4468"         # raised controls on menus: quick toggles, title bar button hover
+border = "#7E84A0"         # edges that must show at 3:1: text fields
+pumpkin_dark = "#6B4A10"   # alternate background for accented areas
 
 # Text
-cream = "#F2E9E1"
-inactive = "#ADA2AE"
+cream = "#F4EEE1"
+inactive = "#A8A9B8"
 white = "#FFFFFF"
 
-# Autumn accents
-pumpkin = "#E8751A"        # accent, focus, hover
-ember = "#B14716"          # selection background
+# Christmas accents
+pumpkin = "#E9A820"        # accent, focus, hover
+ember = "#C03434"          # selection background
 candle = "#F0B429"         # neutral / warning
 apricot = "#F5A05A"        # links
-plum = "#A77BCA"           # visited links
+plum = "#B389D6"           # visited links
 olive = "#A9BA4B"          # positive
-cranberry = "#EE6366"      # negative
+cranberry = "#F27477"      # negative
 cranberry_dark = "#BE5156" # negative backgrounds behind white text
-moss = "#4A5D23"           # decoration only, never text
-plum_icon = "#8952A0"      # icon bodies: the icon masters' purples are held to its hue
+moss = "#3F6B45"           # decoration only, never text
+plum_icon = "#46589E"      # icon bodies: the icon masters' blues are held to its hue
 
 # Text on the ember selection background
 sel_inactive = "#FAE6DC"
@@ -44,8 +44,8 @@ chameleon = "#73BA25"
 
 [roles]
 # Boot splash (Plymouth) and login screen gradients: top to bottom
-sky_top = "#0E0A12"
-sky_bottom = "#2E1D2B"
+sky_top = "#0B0E1C"
+sky_bottom = "#1E2A4A"
 progress_track = "pumpkin_dark"
 progress_fill = "pumpkin"
 sddm_fallback = "night"
