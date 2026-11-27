@@ -154,7 +154,7 @@ scales in the test VM (`CHRISTMAS_VM_RES=2256x1504 tools/dev/vm/vm.sh boot`).
 
 Icons are composed by [`tools/vectors.py`](tools/vectors.py) from the SVG
 masters: folder icons are the master folder plus an emblem glyph, file types
-the page master plus one, settings icons a glyph carved into the pumpkin
+the page master plus one, settings icons a glyph carved into the bauble
 master. The mapping from masters to icon names is in `FOLDER_EMBLEMS`, `APPS`,
 `DEVICES`, `SETTINGS`, `MIME_EMBLEMS`, `SYMBOLIC` and `ALIASES` there, and
 `normalise()` holds every colour master to the palette. Generate colour icons
