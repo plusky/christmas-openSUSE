@@ -150,8 +150,7 @@ DEVICES = {
     "device-monitor": ("video-display", "display"),
     "device-battery": ("battery",),
     "device-computer": ("computer", "computer-laptop"),
-    "app-spectacle": ("camera-photo",),
-    "app-camera": ("camera-web",),
+    "app-camera": ("camera-web", "camera-photo"),
 }
 
 # Settings dialogs (Xfce's, and the same KCMs and panels elsewhere): the
@@ -534,7 +533,7 @@ def normalise(colour, palette):
     if 260 / 360 <= h <= 340 / 360 and s > 0.2:
         ph, _, ps = colorsys.rgb_to_hls(*(c / 255 for c in rgb(palette["plum_icon"])))
         h, s = ph, min(s, ps)
-    elif light > 0.93 and chroma < 0.05:
+    elif light > 0.80 and chroma < 0.25:
         return rgb(palette["cream"])
     night = rgb(palette["night"])
     while light < 1 and contrast(tuple(round(c * 255) for c in colorsys.hls_to_rgb(h, light, s)), night) < 1.5:
