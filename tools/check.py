@@ -585,11 +585,16 @@ def check_kde_lookup():
         return
     files = [f for f in icons.rglob("*") if f.suffix in (".svg", ".png")]
     ours = {f.stem for f in files}
+    # The kde/ links are plan()'s output, not icons: an exact name resolves
+    # to its link and never falls through, so lookups must not see them. (A
+    # link would shadow the wanted one-colour hit with a name that can never
+    # be one_colour, failing every state variant of it.)
+    lookup = {f.stem for f in files if "kde" not in f.parts}
     one_colour = {f.stem for f in files if not f.is_symlink() and f.suffix == ".svg"
                   and "ColorScheme-Text" in f.read_text()}
     breeze = kde_lookup.breeze()
     wrong = sorted((name, hit) for name in breeze if name not in ours
-                   for hit in [kde_lookup.first_hit(name, ours)]
+                   for hit in [kde_lookup.first_hit(name, lookup)]
                    if hit and not kde_lookup.wanted(name, breeze[name], hit, one_colour))
     for name, hit in wrong[:5]:
         fail(f"icons: Plasma shows our {hit} for Breeze's {name}")
