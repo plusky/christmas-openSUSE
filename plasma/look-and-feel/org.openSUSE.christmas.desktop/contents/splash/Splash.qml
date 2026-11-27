@@ -5,7 +5,7 @@
     SPDX-License-Identifier: GPL-2.0-or-later
 
     Derived from Breeze's splash (plasma-workspace v6.8.0). The chameleon sits
-    above a row of five pumpkins that light up as Plasma starts.
+    above a row of five star lanterns that light up as Plasma starts.
 */
 
 import QtQuick
@@ -19,7 +19,7 @@ Rectangle {
 
     property int stage
 
-    // Candle flicker shared by every lit pumpkin
+    // Star glow shared by every lit lantern
     property real flicker: 1
 
     onStageChanged: {
@@ -95,7 +95,7 @@ Rectangle {
                     }
                     Image {
                         anchors.fill: parent
-                        source: "images/pumpkin-unlit.png"
+                        source: "images/lantern-unlit.png"
                         sourceSize.width: width
                         sourceSize.height: height
                         asynchronous: true
@@ -103,7 +103,7 @@ Rectangle {
                     Image {
                         id: litImage
                         anchors.fill: parent
-                        source: "images/pumpkin-lit.png"
+                        source: "images/lantern-lit.png"
                         sourceSize.width: width
                         sourceSize.height: height
                         asynchronous: true
@@ -111,7 +111,7 @@ Rectangle {
 
                         Behavior on opacity {
                             SequentialAnimation {
-                                // Stages 1-3 arrive together, so light those pumpkins one by one
+                                // Stages 1-3 arrive together, so light those lanterns one by one
                                 PauseAnimation { duration: lantern.index < 3 ? lantern.index * 220 : 0 }
                                 NumberAnimation { duration: Kirigami.Units.longDuration * 2; easing.type: Easing.OutQuad }
                             }
