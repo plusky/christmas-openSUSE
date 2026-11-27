@@ -14,4 +14,4 @@ and comments updated.
 |---|---|
 | `recraftv4_1_utility_vector` (SVG) | 1:1, count 2, ×2 rounds |
 
-The PNG masters are rasterized from the SVG masters (`rsvg-convert -w 1024`): the splash build only reads raster masters (as in halloween-openSUSE), so without them it silently fell back to placeholder pumpkins.
+The PNG masters are rasterized from the SVG masters (`rsvg-convert -w 1024`) with the white backdrop flood-filled to transparent: the splash build only reads raster masters (as in halloween-openSUSE), so without them it silently fell back to placeholder pumpkins.
