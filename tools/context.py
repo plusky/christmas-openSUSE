@@ -39,7 +39,7 @@ class Context:
 
     @cached_property
     def lanterns(self):
-        """(lit, unlit) pumpkin lanterns; both share one outline."""
+        """(lit, unlit) star lanterns; both share one outline."""
         p = self.palette
         return (self.master("lantern-lit", lambda: ph.pumpkin(p, 192, lit=True)).convert("RGBA"),
                 self.master("lantern-unlit", lambda: ph.pumpkin(p, 192, lit=False)).convert("RGBA"))

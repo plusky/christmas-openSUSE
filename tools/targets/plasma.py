@@ -66,8 +66,8 @@ def build_look_and_feel(ctx):
     bg = ImageEnhance.Brightness(night.filter(ImageFilter.GaussianBlur(8))).enhance(0.55)
     save_jpeg(bg, splash / "images/background.jpg")
     save_png(fit(ctx.hero, 512), splash / "images/hero.png")
-    save_png(fit(lit, 192), splash / "images/pumpkin-lit.png")
-    save_png(fit(unlit, 192), splash / "images/pumpkin-unlit.png")
+    save_png(fit(lit, 192), splash / "images/lantern-lit.png")
+    save_png(fit(unlit, 192), splash / "images/lantern-unlit.png")
     save_png(ph.glow(p, 256), splash / "images/glow.png")
     write(splash / "palette.js", ".pragma library\n// Generated from art/palette.toml by tools/build.py\n"
           + "".join(f'var {k} = "{p[k]}";\n' for k in ("night", "cream", "pumpkin", "candle")))
