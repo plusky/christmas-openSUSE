@@ -1,0 +1,51 @@
+# The single source of truth for every colour in christmas-openSUSE.
+# tools/build.py fills the colour scheme, the Plasma style colours, the
+# splash, SDDM and Plymouth from these values; nothing else hardcodes them.
+
+[colors]
+# Backgrounds: a cold, blue-tinted winter night
+night = "#181C2E"          # window
+view = "#111420"           # lists, text fields
+view_alt = "#1D2233"       # alternate rows
+header = "#20263E"         # headers, title bars, tooltips
+button = "#272C4A"
+complementary = "#0E1120"  # OSDs and other complementary areas
+raised = "#3D4468"         # raised controls on menus: quick toggles, title bar button hover
+border = "#7E84A0"         # edges that must show at 3:1: text fields
+pumpkin_dark = "#6B4A10"   # alternate background for accented areas
+
+# Text
+cream = "#F4EEE1"
+inactive = "#A8A9B8"
+white = "#FFFFFF"
+
+# Christmas accents
+pumpkin = "#E9A820"        # accent, focus, hover
+ember = "#C03434"          # selection background
+candle = "#F0B429"         # neutral / warning
+apricot = "#F5A05A"        # links
+plum = "#B389D6"           # visited links
+olive = "#A9BA4B"          # positive
+cranberry = "#F27477"      # negative
+cranberry_dark = "#BE5156" # negative backgrounds behind white text
+moss = "#3F6B45"           # decoration only, never text
+plum_icon = "#46589E"      # icon bodies: the icon masters' blues are held to its hue
+
+# Text on the ember selection background
+sel_inactive = "#FAE6DC"
+sel_link = "#FFE8B9"
+sel_visited = "#F2E6FF"
+sel_positive = "#E4F2A6"
+sel_neutral = "#FFE9A9"
+sel_negative = "#FFE4E5"
+
+# openSUSE Green: only ever used on the chameleon, never in the UI
+chameleon = "#73BA25"
+
+[roles]
+# Boot splash (Plymouth) and login screen gradients: top to bottom
+sky_top = "#0B0E1C"
+sky_bottom = "#1E2A4A"
+progress_track = "pumpkin_dark"
+progress_fill = "pumpkin"
+sddm_fallback = "night"

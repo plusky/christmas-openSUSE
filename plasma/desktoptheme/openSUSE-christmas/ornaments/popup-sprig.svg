@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 64 64">
+  <!-- Fir sprig hanging from the top-right corner of popups (placeholder, hand-drawn) -->
+  <path d="M63 1 C 56 6, 48 14, 40 28" fill="none" stroke="#3F6B45" stroke-width="2.2" stroke-linecap="round"/>
+  <g stroke="#3F6B45" stroke-width="2" stroke-linecap="round">
+    <path d="M52 12 L44 10 M52 12 L46 18 M46 17 L38 16 M46 17 L41 23 M41 23 L33 22 M41 23 L37 28"/>
+  </g>
+  <circle cx="40" cy="29" r="2.6" fill="#C03434"/>
+  <circle cx="36.6" cy="32.2" r="2.2" fill="#C03434"/>
+  <circle cx="42.4" cy="32.6" r="2" fill="#C03434"/>
+  <path d="M48 8 L50 13 L55 13 L51 16 L52 21 L48 18 L44 21 L45 16 L41 13 L46 13 Z" fill="#E9A820"/>
+</svg>

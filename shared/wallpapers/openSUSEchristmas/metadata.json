@@ -1,0 +1,16 @@
+{
+    "KPlugin": {
+        "Authors": [
+            {
+                "Email": "martin@pluskal.org",
+                "Name": "Martin Pluskal"
+            }
+        ],
+        "Description": "A Geeko-inspired chameleon and its star lanterns on a snowy branch: dusk by day, moonlit by night",
+        "Id": "openSUSEchristmas",
+        "License": "CC-BY-SA-4.0",
+        "Name": "openSUSE Christmas",
+        "Version": "2026.12.0",
+        "Website": "https://github.com/plusky/christmas-openSUSE"
+    }
+}
