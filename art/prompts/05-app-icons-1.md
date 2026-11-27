@@ -1,8 +1,10 @@
 # 05 App icons, batch 1
 
-- Masters: `art/source/vectors/app-browser.svg`, `app-konsole.svg`,
-  `app-settings.svg`, `app-kate.svg`, `app-spectacle.svg`, `app-ark.svg`,
-  `app-gwenview.svg`, `app-help.svg`, `app-sysmon.svg`, `app-discover.svg`
+- Masters: `art/source/vectors/app-browser.svg`, `art/source/vectors/app-konsole.svg`,
+  `art/source/vectors/app-settings.svg`, `art/source/vectors/app-kate.svg`,
+  `art/source/vectors/app-spectacle.svg`, `art/source/vectors/app-ark.svg`,
+  `art/source/vectors/app-gwenview.svg`, `art/source/vectors/app-help.svg`,
+  `art/source/vectors/app-sysmon.svg`, `art/source/vectors/app-discover.svg`
 - Copyright: 2026 Martin Pluskal <martin@pluskal.org>
 
 The ten most visible apps, generated with the folder as style reference
