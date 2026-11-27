@@ -3,7 +3,7 @@
 """Turn the Recraft SVG masters in art/source/vectors/ into icons and ornaments.
 
 Recraft SVGs are a flat list of <path d fill="rgb()" transform="translate()">
-on a 2048x2048 canvas, with a full-canvas white backdrop path first and C2PA
+on a square canvas, with a full-canvas white backdrop path first and C2PA
 content credentials in <metadata>; a few fills may reference linear gradients,
 which load() flattens to their mean stop colour. This module reads them as
 (d, colour) shapes, drops the backdrop, and recomposes them:
@@ -126,7 +126,7 @@ APPS = {
     "app-yast": ("yast-control-center",),
     "app-volume": ("org.pulseaudio.pavucontrol", "pavucontrol", "multimedia-volume-control",
                    "preferences-desktop-sound"),
-    "app-bluetooth": ("blueman", "preferences-system-bluetooth", "bluetooth"),
+    "app-bluetooth": ("blueman",),
     "device-harddisk": ("org.gnome.DiskUtility", "gnome-disks", "preferences-system-disks",
                         "preferences-smart-status"),
 }
