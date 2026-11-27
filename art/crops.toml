@@ -6,12 +6,12 @@
 # `focus` instead, between the chameleon's head and the lanterns.
 
 [dusk]
-keep = [0.615, 0.10, 0.965, 0.82]
-focus = [0.80, 0.40]
+keep = [0.60, 0.18, 0.95, 0.85]
+focus = [0.79, 0.50]
 
 [night]
-keep = [0.615, 0.10, 0.965, 0.82]
-focus = [0.80, 0.40]
+keep = [0.60, 0.18, 0.95, 0.85]
+focus = [0.79, 0.50]
 
 # The splash backdrop: the calm left part of the night master (x0, y0, x1, y1),
 # so the splash's own chameleon isn't doubled by the one in the wallpaper.

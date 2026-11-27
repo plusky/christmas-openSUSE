@@ -123,4 +123,4 @@ def login_background(wallpapers, size):
     scrim keeps their labels readable."""
     w, h = size
     bg = crop_to(wallpapers, "night", w / h, zoomed=True).resize(size, Image.LANCZOS)
-    return scrim(vignette(ImageEnhance.Brightness(bg).enhance(0.9)))
+    return scrim(vignette(ImageEnhance.Brightness(bg).enhance(0.9)), height=0.42, strength=0.65)
