@@ -16,7 +16,7 @@
         "Id": "openSUSE-christmas",
         "License": "LGPL-2.0-or-later",
         "Name": "openSUSE Christmas",
-        "Version": "2026.12.0",
+        "Version": "2026.12.1",
         "Website": "https://github.com/plusky/christmas-openSUSE"
     },
     "X-Plasma-API": "5.0"
