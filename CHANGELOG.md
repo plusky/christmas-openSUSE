@@ -6,6 +6,16 @@ calendar-based: `YEAR.MONTH.PATCH`, the month without a leading zero.
 
 ## [Unreleased]
 
+## [2026.12.1] - 2026-11-28
+
+### Fixed
+
+- File-manager icons (Dolphin, Nautilus, Thunar) no longer carry Halloween's
+  bat, against the brief's explicit seasonal rule: the folder emblem is now
+  the sparkle, echoing the splash's star lanterns. The deleted bat master is
+  dropped from its prompt record. Five README screenshots retaken with the
+  fixed icons.
+
 ## [2026.12.0] - 2026-11-28
 
 The first release: a cosy winter Christmas theme for openSUSE Tumbleweed,
