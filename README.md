@@ -2,9 +2,7 @@
 
 A cosy winter Christmas theme for openSUSE Tumbleweed with KDE Plasma, GNOME,
 Xfce and Sway: warm candle-lit colours, snow, fir and baubles, and a friendly
-chameleon in a Santa hat. (Artwork in progress: the screenshots below still
-show the Halloween skeleton this theme is built from; they are retaken with
-the first gallery.)
+chameleon in a Santa hat, all screenshots retaken with the theme in a test VM.
 
 [![Check](https://github.com/plusky/christmas-openSUSE/actions/workflows/check.yml/badge.svg?branch=main)](https://github.com/plusky/christmas-openSUSE/actions/workflows/check.yml)
 [![Licence: multiple (REUSE)](https://img.shields.io/badge/licence-multiple_(REUSE)-a77bca?labelColor=1c1622)](#licence)
@@ -14,23 +12,23 @@ the first gallery.)
 [![Sway 1.12+](https://img.shields.io/badge/Sway-1.12%2B-e8751a?labelColor=1c1622)](https://swaywm.org/)
 [![openSUSE Tumbleweed](https://img.shields.io/badge/openSUSE-Tumbleweed-f0b429?labelColor=1c1622)](https://get.opensuse.org/tumbleweed/)
 
-<img src="docs/screenshots/desktop.jpg" width="100%" alt="Placeholder for the Christmas desktop screenshot">
+<img src="docs/screenshots/desktop.jpg" width="100%" alt="Plasma desktop at night: the chameleon in a Santa hat on a snowy branch over moonlit hills, panel with Christmas icons">
 
 | | |
 |---|---|
-| <img src="docs/screenshots/launcher.jpg" alt="The application launcher in dark plum colours, with Christmas icons for apps, categories and power actions"> | <img src="docs/screenshots/dolphin.jpg" alt="Dolphin file manager with orange folders, each carrying an emblem such as a scroll, an acorn or a film reel"> |
+| <img src="docs/screenshots/launcher.jpg" alt="The application launcher with Christmas icons for apps, categories and power actions"> | <img src="docs/screenshots/dolphin.jpg" alt="Dolphin file manager with gold folders, each carrying a navy emblem"> |
 | App launcher | Dolphin with the folder icons |
-| <img src="docs/screenshots/desktop-dusk.jpg" alt="The same wallpaper at dusk, with a rising harvest moon"> | <img src="docs/screenshots/login.jpg" alt="Login screen over a blurred night version of the wallpaper"> |
+| <img src="docs/screenshots/desktop-dusk.jpg" alt="The same wallpaper at dusk, with a rising winter moon over snowy hills"> | <img src="docs/screenshots/login.jpg" alt="Login screen over a blurred night version of the wallpaper"> |
 | The wallpaper at dusk | Login screen (SDDM) |
-| <img src="docs/screenshots/file-types.jpg" alt="Dolphin showing file icons: cream pages with pumpkin emblems for text, PDF, images, music, video, archives, web pages and scripts"> | <img src="docs/screenshots/firefox.jpg" alt="Firefox with plum toolbars and the moonlit forest behind the tabs"> |
+| <img src="docs/screenshots/file-types.jpg" alt="Dolphin showing file icons: cream pages with gold emblems for text, PDF, images, music, video, archives, web pages and scripts"> | <img src="docs/screenshots/firefox.jpg" alt="Firefox with the dark Christmas header over the Christmas article"> |
 | File types | Firefox theme |
-| <img src="docs/screenshots/splash.jpg" alt="Splash screen: the chameleon hugging a jack-o'-lantern above five small lanterns lighting up one by one"> | <img src="docs/screenshots/clock.jpg" alt="An analog clock widget with a carved pumpkin face on the desktop"> |
-| Splash screen | Pumpkin clock |
-| <img src="docs/screenshots/gnome.jpg" alt="GNOME with the night wallpaper: Files shows orange folders with emblems, and the quick settings menu has plum panels with ember-orange toggles"> | <img src="docs/screenshots/xfce.jpg" alt="Xfce with the night wallpaper: the Settings Manager in dark plum, each setting a glyph carved into a pumpkin, a plum window title bar, a dark panel and a Christmas notification"> |
+| <img src="docs/screenshots/splash.jpg" alt="Splash screen: the chameleon in a Santa hat above five star lanterns lighting up one by one"> | <img src="docs/screenshots/clock.jpg" alt="An analog clock widget with a winter face on the desktop"> |
+| Splash screen | Clock widget |
+| <img src="docs/screenshots/gnome.jpg" alt="GNOME with the night wallpaper: Files shows gold folders with navy emblems, and the quick settings menu"> | <img src="docs/screenshots/xfce.jpg" alt="Xfce with the night wallpaper: the Settings Manager with gold icons, a dark window bar, a dark panel and a Christmas notification"> |
 | GNOME | Xfce |
-| <img src="docs/screenshots/sway.jpg" alt="Sway with the night wallpaper: a dark top bar with workspaces, clock and system modules in pumpkin accent, the notification bell highlighted in plum"> | <img src="docs/screenshots/swaync.jpg" alt="SwayNotificationCenter control centre in dark plum with the carved-gear icon over the empty No Notifications list"> |
+| <img src="docs/screenshots/sway.jpg" alt="Sway with the night wallpaper: a dark top bar with workspaces, clock and system modules in gold, a Christmas notification"> | <img src="docs/screenshots/swaync.jpg" alt="SwayNotificationCenter control centre in dark navy with the gear icon over the empty notifications list"> |
 | Sway | swaync notification centre |
-| <img src="docs/screenshots/lockscreen.jpg" alt="The Plasma lock screen: a large clock over the night wallpaper with the chameleon and lanterns"> | <img src="docs/screenshots/gnome-apps.jpg" alt="GNOME's app grid over the night wallpaper: calculator, clocks, maps, mail, music and the other apps in the theme's flat autumn style"> |
+| <img src="docs/screenshots/lockscreen.jpg" alt="The Plasma lock screen: a large clock over the night wallpaper with the chameleon"> | <img src="docs/screenshots/gnome-apps.jpg" alt="GNOME's app grid over the night wallpaper with the theme's flat winter icons"> |
 | Lock screen (Plasma) | GNOME apps |
 
 ## What's included
@@ -43,14 +41,14 @@ the first gallery.)
 | Global theme with a star splash screen | `org.openSUSE.christmas.desktop` | Plasma |
 | Icon theme over Breeze Dark: folders, file types, drives and devices, trash, the apps KDE, GNOME and Xfce ship by default (files, terminal, settings, editor, calculator, clocks, mail (also Thunderbird), maps, music (also Spotify), videos and more) and YaST, System Settings' and Xfce's settings as glyphs carved into baubles and GNOME Settings' panels as one-colour glyphs, a web-browser icon (also for Firefox), code-editor and chat icons (VSCodium, Slack, Polari, NeoChat), app-menu and power icons | `openSUSE-christmas` | Plasma |
 | The same icons over Adwaita | `openSUSE-christmas-adwaita` | GNOME, Xfce, Sway |
-| GTK 3 theme: night colours with ember and pumpkin accents, built on [adw-gtk3](https://github.com/lassekongo83/adw-gtk3) | `openSUSE-christmas` | GNOME, Xfce, GTK 3 apps |
+| GTK 3 theme: night colours with ember-red and gold accents, built on [adw-gtk3](https://github.com/lassekongo83/adw-gtk3) | `openSUSE-christmas` | GNOME, Xfce, GTK 3 apps |
 | GNOME Shell theme: top bar, menus, quick settings, calendar | `openSUSE-christmas` | GNOME with the User Themes extension |
 | Window manager theme, also at 1.5× and 2× | `openSUSE-christmas`, `-hdpi`, `-xhdpi` | Xfce (xfwm4) |
 | Notification theme | `openSUSE-christmas` | Xfce (xfce4-notifyd) |
 | Login screen, built on openSUSE's `breeze-openSUSE` | `breeze-openSUSE-christmas` | SDDM |
 | Login background (the login screen itself has no themes) | `openSUSE-christmas` | Plasma Login Manager |
 | Boot splash | `openSUSE-christmas` | Plymouth |
-| Firefox theme: plum toolbars, pumpkin accents, the moonlit forest behind the tabs | `openSUSE-christmas@pluskal.org` | Firefox |
+| Firefox theme: dark toolbars with gold accents | `openSUSE-christmas@pluskal.org` | Firefox |
 | Sway colours and gaps, a Waybar stylesheet and a swaync notification theme | `openSUSE-christmas` | Sway, Waybar, swaync |
 
 openSUSE's green and blue are replaced by a winter Christmas palette

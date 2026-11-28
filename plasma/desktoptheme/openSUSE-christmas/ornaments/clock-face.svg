@@ -1,18 +1,10 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="200" height="200" viewBox="0 0 200 200">
-  <!-- Carved pumpkin clock face (placeholder, hand-drawn). The hands rotate
+  <!-- Winter clock face (placeholder, hand-drawn). The hands rotate
        around the centre of this element, so the invisible rect keeps it 200x200. -->
   <rect width="200" height="200" fill="#000000" fill-opacity="0.002"/>
-  <path d="M94 16 C 92 8, 98 2, 108 3 C 106 8, 104 12, 106 18 Z" fill="#4A5D23"/>
-  <ellipse cx="46" cy="106" rx="44" ry="80" fill="#B84A17"/>
-  <ellipse cx="154" cy="106" rx="44" ry="80" fill="#B84A17"/>
-  <ellipse cx="70" cy="104" rx="46" ry="88" fill="#D2631A"/>
-  <ellipse cx="130" cy="104" rx="46" ry="88" fill="#D2631A"/>
-  <ellipse cx="100" cy="102" rx="44" ry="90" fill="#E8751A"/>
-  <g fill="none" stroke="#B84A17" stroke-width="2" stroke-opacity="0.45">
-    <path d="M84 18 C 66 60, 66 150, 84 190"/>
-    <path d="M116 18 C 134 60, 134 150, 116 190"/>
-  </g>
-  <g fill="#F0B429">
+  <circle cx="100" cy="100" r="92" fill="#181C2E"/>
+  <circle cx="100" cy="100" r="92" fill="none" stroke="#F4EEE1" stroke-width="6"/>
+  <g fill="#F4EEE1">
     <rect x="96" y="22" width="8" height="15" rx="2" transform="rotate(0 100 100)"/>
     <rect x="97" y="24" width="6" height="11" rx="2" transform="rotate(30 100 100)"/>
     <rect x="97" y="24" width="6" height="11" rx="2" transform="rotate(60 100 100)"/>
@@ -26,4 +18,5 @@
     <rect x="97" y="24" width="6" height="11" rx="2" transform="rotate(300 100 100)"/>
     <rect x="97" y="24" width="6" height="11" rx="2" transform="rotate(330 100 100)"/>
   </g>
+  <path d="M100 52 L106 68 L123 68 L109 78 L114 94 L100 84 L86 94 L91 78 L77 68 L94 68 Z" fill="#E9A820"/>
 </svg>

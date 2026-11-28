@@ -1,6 +1,6 @@
 [Icon Theme]
 Name=openSUSE Christmas
-Comment=Autumn Christmas folders, file types, devices, apps, menu and launcher icons over Breeze Dark
+Comment=Winter Christmas folders, file types, devices, apps, menu and launcher icons over Breeze Dark
 Inherits=breeze-dark,breeze,hicolor
 Example=folder
 FollowsColorScheme=true

@@ -2,7 +2,7 @@
   "manifest_version": 3,
   "name": "openSUSE Christmas",
   "version": "@VERSION@",
-  "description": "A cosy autumn Christmas night: plum toolbars, pumpkin accents and jack-o'-lanterns by moonlight.",
+  "description": "A cosy winter Christmas night: dark toolbars, gold accents and star lanterns by moonlight.",
   "author": "Martin Pluskal",
   "browser_specific_settings": {
     "gecko": {
