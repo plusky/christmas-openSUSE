@@ -61,7 +61,7 @@ ALIASES = {
 EMBLEM_SCALE = 1.12      # emblem size relative to the master's leaf
 
 # Colour application icons: master -> the icon names apps ask for, on KDE,
-# GNOME and Xfce alike (a file manager is the bat folder everywhere, a
+# GNOME and Xfce alike (a file manager is the sparkle folder everywhere, a
 # terminal the same terminal). Other projects' logos (Qt, the ArtCraft suite,
 # btop) are left to their own themes, like the distribution logo. Web
 # browsers, Firefox included, get an original browser icon, never a modified
@@ -230,7 +230,8 @@ MIME_EMBLEMS = {
 }
 MIME_EMBLEM_SIZE = 0.66   # emblem size relative to the page's width
 
-# Dolphin is the master folder with a bat, like Breeze's folder with a dolphin
+# File managers are the master folder with a sparkle, echoing the splash's
+# star lanterns (the brief forbids Halloween's bat).
 DOLPHIN = ("org.kde.dolphin", "system-file-manager", "org.gnome.Nautilus", "org.xfce.thunar", "org.xfce.filemanager")
 
 # One-colour icons of the app menu and the leave/power actions: master ->
@@ -449,12 +450,12 @@ def split_folder(shapes):
     return body, leaf, front.colour
 
 
-def emblem_markup(shapes, box, ink, paper):
+def emblem_markup(shapes, box, ink, paper, scale=EMBLEM_SCALE):
     """Fit a black-on-white glyph into `box`, dark parts in `ink`, light parts in `paper`."""
     glyph = [s for s in shapes if luminance(s.colour) < 0.5]
     gbox = union(s.bbox() for s in glyph)
     cx, cy = (box[0] + box[2]) / 2, (box[1] + box[3]) / 2
-    size = max(box[2] - box[0], box[3] - box[1]) * EMBLEM_SCALE
+    size = max(box[2] - box[0], box[3] - box[1]) * scale
     body = "".join(s.markup(ink if luminance(s.colour) < 0.5 else paper) for s in shapes
                    if inside(s.bbox(), gbox))
     return fit(body, gbox, (cx - size / 2, cy - size / 2, size))
@@ -609,11 +610,12 @@ def app_icons(palette):
         if shapes:
             text = icon(paint(shapes, palette), union(s.bbox() for s in shapes), 0.06)
             made.update({f"scalable/apps/{n}.svg": text for n in names})
-    folder, bat = load("folder"), load("emblem-bat")
-    if folder and bat:
+    folder, sparkle = load("folder"), load("glyph-sparkle")
+    if folder and sparkle:
         body, leaf, front = split_folder(folder)
         text = icon("".join(s.markup() for s in body)
-                    + emblem_markup(bat, union(s.bbox() for s in leaf), palette["night"], front),
+                    + emblem_markup(sparkle, union(s.bbox() for s in leaf), palette["night"], front,
+                                      scale=EMBLEM_SCALE * 0.55),
                     union(s.bbox() for s in folder), 0.06)
         made.update({f"scalable/apps/{n}.svg": text for n in DOLPHIN})
     return made
