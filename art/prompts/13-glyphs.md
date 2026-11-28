@@ -33,7 +33,7 @@
   `art/source/vectors/glyph-touch.svg`,
   `art/source/vectors/glyph-wand.svg`,
   `art/source/vectors/glyph-web.svg`,
-  `art/source/vectors/glyph-window.svg`, `art/source/vectors/emblem-bat.svg`,
+  `art/source/vectors/glyph-window.svg`,
   `art/source/vectors/glyph-logout.svg`, `art/source/vectors/mime-page.svg`
 - Copyright: 2026 Martin Pluskal <martin@pluskal.org>
 
@@ -46,3 +46,5 @@ One-colour black-silhouette glyphs for settings pages, symbolic actions and GNOM
 Adversarial review (all four angles, twice): fixed a trousers-reading bookmark, frog stylus, paper-plane cursor, duplicate wireframe globes, moon-only hibernate, missing logout and file-manager bat masters, grey shading, gear-notifications and compass hijacks (both dropped). Declined with reasons: 16px variants (icon-polish follow-up), micro-speck stripping (sub-pixel, invisible rendered).
 
 Late additions in review: `glyph-logout` (door + arrow, was missing entirely) and a cream `mime-page` document base (a stray black page was staged by mistake and replaced).
+
+Retired after the 2026.12.0 release: `emblem-bat` (a Halloween leftover against the brief) was deleted; file-manager icons use `glyph-sparkle` as their folder emblem instead (code change only, no new art).
