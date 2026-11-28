@@ -243,7 +243,8 @@ SYMBOLIC = {
     "glyph-crystal": ("categories", ("help-about-symbolic",)),
     "glyph-web": ("categories", ("applications-internet-symbolic",)),
     "glyph-quill": ("categories", ("applications-office-symbolic",)),
-    "glyph-gear": ("categories", ("applications-system-symbolic", "preferences-system-symbolic")),
+    "glyph-gear": ("categories", ("applications-system-symbolic", "preferences-system-symbolic",
+                                 "applications-system")),
     "glyph-broom": ("categories", ("applications-utilities-symbolic",)),
 
     # Thunar's side pane asks for go-home for Home; Dolphin's Home button too
@@ -260,6 +261,8 @@ SYMBOLIC = {
     "glyph-people": ("actions", ("system-switch-user", "system-switch-user-symbolic")),
     # Not notifications-disabled: do not disturb needs the crossed bell (Plasma's tray, GNOME)
     "glyph-bell": ("actions", ("notification-symbolic", "notification", "bell-symbolic", "bell")),
+    # The clipboard app's board-and-clip doubles as the paste action
+    "app-clipboard": ("actions", ("edit-paste",)),
 }
 SYMBOLIC_SIZE = 16
 
@@ -495,6 +498,7 @@ def folder_icons(palette):
             icon(body_markup + "".join(s.markup(cream if luminance(s.colour) > 0.93 else None) for s in leaf),
                  canvas, 0.06),
         "16x16/places/folder.svg": icon(body_markup, canvas, 0.0, 16),
+        "22x22/apps/folder.svg": icon(body_markup, canvas, 0.0, 22),
         "scalable/places/folder-open.svg": icon(open_folder_markup(body, palette, paper=False), canvas, 0.06),
         "scalable/places/folder-drag-accept.svg":
             icon(open_folder_markup(body, palette, paper=True), canvas, 0.06),
